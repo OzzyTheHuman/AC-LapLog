@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:LapLog"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <Style x:Key="Header" TargetType="TextBlock">
+             <Setter Property="FontSize" Value="24"/>
+         </Style>
     </Application.Resources>
 </Application>
