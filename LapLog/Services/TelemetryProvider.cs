@@ -14,7 +14,8 @@ public class TelemetryProvider : ITelemetryProvider
         {
             new LapTime("Akina", "Toyota AE86", new TimeSpan(4, 30, 738)),
             new LapTime("Akagi", "Mazda RX7", new TimeSpan(4, 37, 529)),
-            new LapTime("Nordschleife", "Nissan Silvia S15", new TimeSpan(9, 50, 680))
+            new LapTime("Nordschleife", "Nissan Silvia S15", new TimeSpan(9, 50, 680)),
+            new LapTime("Nordschleife", "Nissan Silvia S15", new TimeSpan(13, 10, 393))
         };
     }
 }

@@ -17,10 +17,12 @@ public partial class App : Application
     
     protected override void OnStartup(StartupEventArgs e)
     {
+        ITelemetryProvider telemetryProvider = new TelemetryProvider();
+        
         MainWindow = new MainWindow()
         {
             // Defining datacontext for MainWindow.xaml
-            DataContext = new LapTimeListingViewModel()
+            DataContext = new LapTimeListingViewModel(telemetryProvider)
         };
         
         MainWindow.Show();
