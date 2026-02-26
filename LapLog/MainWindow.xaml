@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LapLog"
         xmlns:views="clr-namespace:LapLog.Views"
-        xmlns:vms="clr-namespace:LapLog.ViewModel"
+        xmlns:vms="clr-namespace:LapLog.ViewModels"
         mc:Ignorable="d"
         Title="LapLog" Height="450" Width="800"
         FontSize="14">
         
         <Grid Margin="20 10" MaxWidth="600">
                 <Grid.Resources>
+                        <!--When you get signal from LapTimeListingViewModel (datacontext), use LapTimeListingView-->
                         <DataTemplate DataType="{x:Type vms:LapTimeListingViewModel}">
                                 <views:LapTimeListingView/>
                         </DataTemplate>
                 </Grid.Resources>
-                
+                <!--Display what we are binding to. Binding without name is default datacontext-->
+                <!--The datacontext is defined in app.xaml.cs-->
                 <ContentControl Content="{Binding}"></ContentControl>
         </Grid>
 </Window>

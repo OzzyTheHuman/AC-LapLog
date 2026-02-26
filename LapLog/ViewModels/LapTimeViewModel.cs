@@ -1,6 +1,6 @@
 ﻿using LapLog.Models;
 
-namespace LapLog.ViewModel;
+namespace LapLog.ViewModels;
 
 public class LapTimeViewModel : ViewModelBase
 {

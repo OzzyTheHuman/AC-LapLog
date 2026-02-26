@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace LapLog.ViewModel;
+namespace LapLog.ViewModels;
 
 public class ViewModelBase : INotifyPropertyChanged
 {

@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows;
 using LapLog.Models;
 using LapLog.Services;
-using LapLog.ViewModel;
+using LapLog.ViewModels;
 using LapLog.Views;
 
 namespace LapLog;
@@ -19,6 +19,7 @@ public partial class App : Application
     {
         MainWindow = new MainWindow()
         {
+            // Defining datacontext for MainWindow.xaml
             DataContext = new LapTimeListingViewModel()
         };
         
