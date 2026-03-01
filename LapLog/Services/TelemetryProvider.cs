@@ -16,7 +16,7 @@ public class TelemetryProvider : ITelemetryProvider
         
         List<string> carNames = new List<string>();
         List<string> trackNames = new List<string>();
-        List<string> dates = new List<string>();
+        List<DateTime> dates = new List<DateTime>();
         List<TimeSpan> times = new List<TimeSpan>();
         
         using (StreamReader sr = new StreamReader(sourcePath))
@@ -35,7 +35,9 @@ public class TelemetryProvider : ITelemetryProvider
                 else if (line.Contains("DATE"))
                 {
                     string date = line.Substring(line.LastIndexOf("=") + 1);
-                    dates.Add(date);
+                    DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(date)).DateTime;
+                    
+                    dates.Add(dateTime);
                 }
                 else if (line.Contains("TIME"))
                 {
@@ -50,9 +52,7 @@ public class TelemetryProvider : ITelemetryProvider
         List<LapTime> lapTimes = new List<LapTime>();
         for (int i = 0; i < carNames.Count; i++)
         {
-            // TODO: display date for track record, right now its not used - maybe another model?
-            
-            lapTimes.Add(new LapTime(trackNames[i],carNames[i],times[i]));
+            lapTimes.Add(new LapTime(trackNames[i],carNames[i],times[i],dates[i]));
         }
 
         return lapTimes;
