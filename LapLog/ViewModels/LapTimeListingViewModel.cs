@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using LapLog.Models;
 using LapLog.Services;
@@ -27,12 +28,30 @@ public class LapTimeListingViewModel : ViewModelBase
     private async void LoadData()
     {
         // Working on raw data, without formatting and parsing. Thats why we are using model, not viewmodel
-        IEnumerable<LapTime> rawData = await _telemetryProvider.GetAllLapTimes();
-        _laptimes.Clear();
-
-        foreach (var lap in rawData)
+        // TODO: Its not real MVVM, this should be in xaml
+        try
         {
-            _laptimes.Add(new LapTimeViewModel(lap));
+            IEnumerable<LapTime> rawData = await _telemetryProvider.GetAllLapTimes();
+            _laptimes.Clear();
+            foreach (var lap in rawData)
+            {
+                _laptimes.Add(new LapTimeViewModel(lap));
+            }
+        }
+        catch (System.IO.FileNotFoundException)
+        {
+            MessageBox.Show(
+                "An error occurred while accessing the personalbest.ini file.\nExpected file path: Documents\\Assetto Corsa\\personalbest.ini", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error
+            );
+        }
+        catch (System.IO.DirectoryNotFoundException)
+        {
+            MessageBox.Show(
+                "An error occurred while accessing the Assetto Corsa directory.\nExpected file path: Documents\\Assetto Corsa\\personalbest.ini",
+                "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error
+            );
         }
     }
 }

@@ -9,7 +9,6 @@ public class TelemetryProvider : ITelemetryProvider
     // App asks the database for data, but app is not frozen when waiting
     // User can move the window, spinner will work etc.
     // TODO: Its not real async method, fix it
-    // TODO: Implement catching exception with wrong directory, for now simply notify user to move .ini file to right location. Later implement option for custom
     public async Task<IEnumerable<LapTime>> GetAllLapTimes()
     {
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
