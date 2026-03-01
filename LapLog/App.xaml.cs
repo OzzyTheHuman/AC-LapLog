@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Windows;
 using LapLog.Models;
 using LapLog.Services;
@@ -17,6 +18,9 @@ public partial class App : Application
     
     protected override void OnStartup(StartupEventArgs e)
     {
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+        
         ITelemetryProvider telemetryProvider = new TelemetryProvider();
         
         MainWindow = new MainWindow()

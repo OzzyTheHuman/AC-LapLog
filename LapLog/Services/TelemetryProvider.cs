@@ -9,13 +9,16 @@ public class TelemetryProvider : ITelemetryProvider
     // App asks the database for data, but app is not frozen when waiting
     // User can move the window, spinner will work etc.
     // TODO: Its not real async method, fix it
+    // TODO: Implement catching exception with wrong directory, for now simply notify user to move .ini file to right location. Later implement option for custom
     public async Task<IEnumerable<LapTime>> GetAllLapTimes()
     {
-        string sourcePath = @"C:\Users\ozzy\source\repos\SystemIOTest\personalbest.ini";
+        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string sourcePath = Path.Combine(documentsPath, "Assetto Corsa\\personalbest.ini");
+        
         List<string> carNames = new List<string>();
         List<string> trackNames = new List<string>();
         List<string> dates = new List<string>();
-        List<string> times = new List<string>();
+        List<TimeSpan> times = new List<TimeSpan>();
         
         using (StreamReader sr = new StreamReader(sourcePath))
         {
@@ -38,7 +41,9 @@ public class TelemetryProvider : ITelemetryProvider
                 else if (line.Contains("TIME"))
                 {
                     string time = line.Substring(line.LastIndexOf("=") + 1);
-                    times.Add(time);
+                    TimeSpan timeSpan = TimeSpan.FromMilliseconds(long.Parse(time));
+                    
+                    times.Add(timeSpan);
                 }
             }
         }
@@ -46,9 +51,9 @@ public class TelemetryProvider : ITelemetryProvider
         List<LapTime> lapTimes = new List<LapTime>();
         for (int i = 0; i < carNames.Count; i++)
         {
-            // TODO: timespan is fake, maybe add another model for storing time ?
             // TODO: display date for track record, right now its not used - maybe another model?
-            lapTimes.Add(new LapTime(trackNames[i],carNames[i],new TimeSpan(1)));
+            
+            lapTimes.Add(new LapTime(trackNames[i],carNames[i],times[i]));
         }
 
         return lapTimes;

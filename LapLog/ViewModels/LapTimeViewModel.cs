@@ -8,8 +8,7 @@ public class LapTimeViewModel : ViewModelBase
 
     public string TrackName => _lapTime.TrackName;
     public string CarName => _lapTime.CarName;
-    public string Time => _lapTime.Time.ToString("g");
-
+    public string Time => _lapTime.Time.ToString(@"mm\:ss\.fff");
     public LapTimeViewModel(LapTime lapTime)
     {
         _lapTime = lapTime;
