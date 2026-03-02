@@ -6,8 +6,8 @@ public class LapTimeViewModel : ViewModelBase
 {
     private readonly LapTime _lapTime;
 
-    public string TrackName => _lapTime.TrackName;
-    public string CarName => _lapTime.CarName;
+    public string TrackName => _lapTime.Track.Name;
+    public string CarName => _lapTime.Car.Name;
     public string Time => _lapTime.Time.ToString(@"mm\:ss\.fff");
     public string Date => _lapTime.Date.ToString("dd/MM/yy");
     public LapTimeViewModel(LapTime lapTime)

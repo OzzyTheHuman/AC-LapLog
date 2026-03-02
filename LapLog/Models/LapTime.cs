@@ -4,15 +4,15 @@ namespace LapLog.Models;
 
 public class LapTime
 {
-    public string TrackName { get; set; }
-    public string CarName { get; set; }
+    public Track Track { get; set; }
+    public Car Car { get; set; }
     public TimeSpan Time { get; set; }
     public DateTime Date { get; set; }
 
-    public LapTime(string trackName, string carName, TimeSpan time, DateTime date)
+    public LapTime(Track track, Car car, TimeSpan time, DateTime date)
     {
-        TrackName = trackName;
-        CarName = carName;
+        Track = track;
+        Car = car;
         Time = time;
         Date = date;
     }

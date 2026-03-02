@@ -14,8 +14,8 @@ public class TelemetryProvider : ITelemetryProvider
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string sourcePath = Path.Combine(documentsPath, "Assetto Corsa\\personalbest.ini");
         
-        List<string> carNames = new List<string>();
-        List<string> trackNames = new List<string>();
+        List<Car> cars = new List<Car>();
+        List<Track> tracks = new List<Track>();
         List<DateTime> dates = new List<DateTime>();
         List<TimeSpan> times = new List<TimeSpan>();
         
@@ -29,8 +29,8 @@ public class TelemetryProvider : ITelemetryProvider
                     string carName = line.Substring(1, line.IndexOf('@') - 1);
                     string trackName = line.Substring(line.IndexOf('@') + 1).TrimEnd(']');
 
-                    carNames.Add(carName);
-                    trackNames.Add(trackName);
+                    cars.Add(new Car(carName));
+                    tracks.Add(new Track(trackName));
                 }
                 else if (line.Contains("DATE"))
                 {
@@ -49,10 +49,12 @@ public class TelemetryProvider : ITelemetryProvider
             }
         }
 
+        // We have a few lists, they are not connected (they just have matching objects in the right positions).
+        // It seems unprofessional, but it works for now.
         List<LapTime> lapTimes = new List<LapTime>();
-        for (int i = 0; i < carNames.Count; i++)
+        for (int i = 0; i < cars.Count; i++)
         {
-            lapTimes.Add(new LapTime(trackNames[i],carNames[i],times[i],dates[i]));
+            lapTimes.Add(new LapTime(tracks[i],cars[i],times[i],dates[i]));
         }
 
         return lapTimes;
