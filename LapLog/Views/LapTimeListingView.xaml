@@ -28,15 +28,21 @@
                   Margin="0 7 0 0"
                   ItemsSource="{Binding AvailableTracks}" 
                   SelectedItem="{Binding SelectedTrack}"
-                  Width="370"
+                  Width="100"
                   HorizontalAlignment="Left" />
         
         <ComboBox Grid.Row="1"
-                  Margin="0 7 0 0"
+                  Margin="110 7 0 0"
                   ItemsSource="{Binding AvailableCars}"
                   SelectedItem="{Binding SelectedCar}"
-                  Width="370"
-                  HorizontalAlignment="Right" /> 
+                  Width="100"
+                  HorizontalAlignment="Left" />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="220 10 0 0">
+            <TextBlock Text="Sort by: " />
+            <RadioButton Content="Lap Time" IsChecked="{Binding SortByTime}" GroupName="SortingGroup" Margin="5 2 0 0" />
+            <RadioButton Content="Date" IsChecked="{Binding SortByDate}" GroupName="SortingGroup" Margin="5 2 0 0"/>
+        </StackPanel>
         
         <ListView Grid.Row="2" Margin="0 7 0 0" ItemsSource="{Binding LapTimes}">
             <ListView.View>

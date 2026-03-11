@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using LapLog.Models;
@@ -29,6 +30,7 @@ public class LapTimeListingViewModel : ViewModelBase
             }
         }
     }
+    
     private string _selectedCar;
     public string SelectedCar
     {
@@ -41,7 +43,20 @@ public class LapTimeListingViewModel : ViewModelBase
             }
         }
     }
-    
+
+    private bool _sortByTime;
+    public bool SortByTime
+    {
+        get => _sortByTime;
+        set
+        {
+            if (SetField(ref _sortByTime, value))
+            {
+                ApplyFilters();
+            }
+        }
+    }
+
     public IEnumerable<string> AvailableTracks
     {
         get
@@ -148,6 +163,15 @@ public class LapTimeListingViewModel : ViewModelBase
             results = results.Where(lap => lap.CarName == SelectedCar);
         }
 
+        if (SortByTime)
+        {
+            results = results.OrderBy(lap => lap.Time);
+        }
+        else
+        {
+            results = results.OrderByDescending(lap => DateTime.ParseExact(lap.Date, "dd.MM.yy", CultureInfo.InvariantCulture));
+        }
+        
         foreach (var lap in results)
         {
             _laptimes.Add(lap);
