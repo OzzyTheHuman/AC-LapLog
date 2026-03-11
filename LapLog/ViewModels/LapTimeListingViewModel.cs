@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using LapLog.Models;
@@ -14,8 +15,39 @@ public class LapTimeListingViewModel : ViewModelBase
     // This is what we are Binding to in LapTimeListingView. {Binding LapTimes} is pointing to this.
     // IEnumerable is the simplest type, this only allows to read, not write.
     public IEnumerable<LapTimeViewModel> LapTimes => _laptimes;
-    
+    private IEnumerable<LapTimeViewModel> _allLapTimes;
     private readonly ITelemetryProvider _telemetryProvider;
+    
+    private string _selectedTrack;
+    public string SelectedTrack
+    {
+        get => _selectedTrack;
+        set
+        {
+            if (SetField(ref _selectedTrack, value))
+            {
+                ApplyFilters();
+            }
+        }
+    }
+    public IEnumerable<string> AvailableTracks
+    {
+        get
+        {
+            if (_allLapTimes == null)
+            {
+                return new List<string>();
+            }
+
+            var tracks = _allLapTimes.Select(lap => lap.TrackName).ToList();
+
+            var distinctTracks = tracks.Distinct().ToList();
+            distinctTracks.Sort();
+            distinctTracks.Insert(0, "All Tracks");
+
+            return distinctTracks;
+        }
+    }
 
     public LapTimeListingViewModel(ITelemetryProvider telemetryProvider)
     {
@@ -23,6 +55,7 @@ public class LapTimeListingViewModel : ViewModelBase
         _telemetryProvider = telemetryProvider;
 
         LoadData();
+        ApplyFilters();
     }
 
     private async void LoadData()
@@ -32,16 +65,25 @@ public class LapTimeListingViewModel : ViewModelBase
         try
         {
             IEnumerable<LapTime> rawData = await _telemetryProvider.GetAllLapTimes();
+
+            var loadedViewModels = new List<LapTimeViewModel>();
             _laptimes.Clear();
+
             foreach (var lap in rawData)
             {
                 _laptimes.Add(new LapTimeViewModel(lap));
+                loadedViewModels.Add(new LapTimeViewModel(lap));
             }
+
+            _allLapTimes = loadedViewModels;
+            OnPropertyChanged(nameof(AvailableTracks));
+            ApplyFilters();
         }
         catch (System.IO.FileNotFoundException)
         {
             MessageBox.Show(
-                "An error occurred while accessing the personalbest.ini file.\nExpected file path: Documents\\Assetto Corsa\\personalbest.ini", "Error",
+                "An error occurred while accessing the personalbest.ini file.\nExpected file path: Documents\\Assetto Corsa\\personalbest.ini",
+                "Error",
                 MessageBoxButton.OK, MessageBoxImage.Error
             );
         }
@@ -52,6 +94,29 @@ public class LapTimeListingViewModel : ViewModelBase
                 "Error",
                 MessageBoxButton.OK, MessageBoxImage.Error
             );
+        }
+    }
+
+    private void ApplyFilters()
+    {
+        if (_allLapTimes == null) return;
+        _laptimes.Clear();
+
+        if (string.IsNullOrEmpty(SelectedTrack) || SelectedTrack == "All Tracks")
+        {
+            foreach (var lap in _allLapTimes)
+            {
+                _laptimes.Add(lap);
+            }
+        }
+        else
+        {
+            var filteredLaps = _allLapTimes.Where(lap => lap.TrackName == SelectedTrack);
+
+            foreach (var lap in filteredLaps)
+            {
+                _laptimes.Add(lap);
+            }
         }
     }
 }
