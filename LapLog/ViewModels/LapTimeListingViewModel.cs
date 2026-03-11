@@ -15,9 +15,8 @@ public class LapTimeListingViewModel : ViewModelBase
     // This is what we are Binding to in LapTimeListingView. {Binding LapTimes} is pointing to this.
     // IEnumerable is the simplest type, this only allows to read, not write.
     public IEnumerable<LapTimeViewModel> LapTimes => _laptimes;
-    private IEnumerable<LapTimeViewModel> _allLapTimes;
     private readonly ITelemetryProvider _telemetryProvider;
-    
+    private IEnumerable<LapTimeViewModel> _allLapTimes;
     private string _selectedTrack;
     public string SelectedTrack
     {
@@ -30,6 +29,19 @@ public class LapTimeListingViewModel : ViewModelBase
             }
         }
     }
+    private string _selectedCar;
+    public string SelectedCar
+    {
+        get => _selectedCar;
+        set
+        {
+            if (SetField(ref _selectedCar, value))
+            {
+                ApplyFilters();
+            }
+        }
+    }
+    
     public IEnumerable<string> AvailableTracks
     {
         get
@@ -48,7 +60,26 @@ public class LapTimeListingViewModel : ViewModelBase
             return distinctTracks;
         }
     }
+    
+    public IEnumerable<string> AvailableCars
+    {
+        get
+        {
+            if (_allLapTimes == null)
+            {
+                return new List<string>();
+            }
 
+            var cars = _allLapTimes.Select(car => car.CarName).ToList();
+
+            var distinctCars = cars.Distinct().ToList();
+            distinctCars.Sort();
+            distinctCars.Insert(0, "All Cars");
+
+            return distinctCars;
+        }
+    }
+    
     public LapTimeListingViewModel(ITelemetryProvider telemetryProvider)
     {
         _laptimes = new ObservableCollection<LapTimeViewModel>();
@@ -71,13 +102,16 @@ public class LapTimeListingViewModel : ViewModelBase
 
             foreach (var lap in rawData)
             {
-                _laptimes.Add(new LapTimeViewModel(lap));
                 loadedViewModels.Add(new LapTimeViewModel(lap));
             }
 
             _allLapTimes = loadedViewModels;
+            
             OnPropertyChanged(nameof(AvailableTracks));
-            ApplyFilters();
+            OnPropertyChanged(nameof(AvailableCars));
+            
+            SelectedTrack = "All Tracks";
+            SelectedCar = "All Cars";
         }
         catch (System.IO.FileNotFoundException)
         {
@@ -101,22 +135,22 @@ public class LapTimeListingViewModel : ViewModelBase
     {
         if (_allLapTimes == null) return;
         _laptimes.Clear();
-
-        if (string.IsNullOrEmpty(SelectedTrack) || SelectedTrack == "All Tracks")
+        
+        IEnumerable<LapTimeViewModel> results = _allLapTimes;
+        
+        if (!string.IsNullOrEmpty(SelectedTrack) && SelectedTrack != "All Tracks")
         {
-            foreach (var lap in _allLapTimes)
-            {
-                _laptimes.Add(lap);
-            }
+            results = results.Where(lap => lap.TrackName == SelectedTrack);
         }
-        else
-        {
-            var filteredLaps = _allLapTimes.Where(lap => lap.TrackName == SelectedTrack);
 
-            foreach (var lap in filteredLaps)
-            {
-                _laptimes.Add(lap);
-            }
+        if (!string.IsNullOrEmpty(SelectedCar) && SelectedCar != "All Cars")
+        {
+            results = results.Where(lap => lap.CarName == SelectedCar);
+        }
+
+        foreach (var lap in results)
+        {
+            _laptimes.Add(lap);
         }
     }
 }

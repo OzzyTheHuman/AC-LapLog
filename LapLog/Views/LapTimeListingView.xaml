@@ -28,8 +28,15 @@
                   Margin="0 7 0 0"
                   ItemsSource="{Binding AvailableTracks}" 
                   SelectedItem="{Binding SelectedTrack}"
-                  Width="200"
-                  HorizontalAlignment="Left" /> 
+                  Width="370"
+                  HorizontalAlignment="Left" />
+        
+        <ComboBox Grid.Row="1"
+                  Margin="0 7 0 0"
+                  ItemsSource="{Binding AvailableCars}"
+                  SelectedItem="{Binding SelectedCar}"
+                  Width="370"
+                  HorizontalAlignment="Right" /> 
         
         <ListView Grid.Row="2" Margin="0 7 0 0" ItemsSource="{Binding LapTimes}">
             <ListView.View>
