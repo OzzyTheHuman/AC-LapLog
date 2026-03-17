@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:LapLog.Views"
         xmlns:vms="clr-namespace:LapLog.ViewModels"
         mc:Ignorable="d"
-        Title="LapLog" Height="450" Width="800"
+        Title="LapLog" Height="550" Width="900"
         FontSize="14">
         
         <Grid Margin="20 10" MaxWidth="800">
