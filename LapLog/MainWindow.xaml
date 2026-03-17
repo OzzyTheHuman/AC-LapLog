@@ -8,7 +8,9 @@
         xmlns:vms="clr-namespace:LapLog.ViewModels"
         mc:Ignorable="d"
         Title="LapLog" Height="550" Width="900"
-        FontSize="14">
+        FontSize="14"
+        Icon="/Assets/laplog-icon.ico">
+        
         
         <Grid Margin="20 10" MaxWidth="800">
                 <Grid.Resources>
