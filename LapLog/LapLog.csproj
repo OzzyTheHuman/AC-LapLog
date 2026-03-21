@@ -6,12 +6,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
-        <ApplicationIcon>Assets\laplog-icon.ico</ApplicationIcon>
+        <ApplicationIcon>Assets\Icon\laplog-icon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Assets\laplog-icon.ico" />
-      <Resource Include="Assets\laplog-icon.ico" />
+      <None Remove="Assets\Icon\laplog-icon.ico" />
+      <Resource Include="Assets\Icon\laplog-icon.ico" />
     </ItemGroup>
 
 </Project>
