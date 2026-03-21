@@ -19,8 +19,9 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
-                       Text="Best laps"
-                       FontSize="24">
+                       Text="Best laps - saved locally"
+                       FontSize="24"
+                       >
             </TextBlock>
         </Grid>
         
