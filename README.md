@@ -13,7 +13,7 @@ You are free to clone this repo and compile it yourself if you want.
 
 ## Disclaimer
 
-- Assetto Corsa and any mods or in-game content are the property of their respective owners. It does not include,
+- Assetto Corsa and any mods or in-game content are the property of their respective owners. This app does not include,
 distribute, or modify game assets or mods.
 
 - Windows SmartScreen will warn you of potential harmful application. Its because I didnt provide certificate.
