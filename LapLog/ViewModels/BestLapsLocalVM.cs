@@ -2,7 +2,7 @@
 
 namespace LapLog.ViewModels;
 
-public class LapTimeViewModel : ViewModelBase
+public class BestLapsLocalVM : ViewModelBase
 {
     private readonly LapTime _lapTime;
 
@@ -10,7 +10,7 @@ public class LapTimeViewModel : ViewModelBase
     public string CarName => _lapTime.Car.Name;
     public string Time => _lapTime.Time.ToString(@"mm\:ss\.fff");
     public string Date => _lapTime.Date.ToString("dd/MM/yy");
-    public LapTimeViewModel(LapTime lapTime)
+    public BestLapsLocalVM(LapTime lapTime)
     {
         _lapTime = lapTime;
     }

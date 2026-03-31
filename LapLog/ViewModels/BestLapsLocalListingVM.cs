@@ -8,16 +8,16 @@ using LapLog.Services;
 
 namespace LapLog.ViewModels;
 
-public class LapTimeListingViewModel : ViewModelBase
+public class BestLapsLocalListingVM : ViewModelBase
 {
     // Data storage in memory, only this ViewModel can use methods like .Add(), .Remove()
-    private readonly ObservableCollection<LapTimeViewModel> _laptimes;
+    private readonly ObservableCollection<BestLapsLocalVM> _laptimes;
 
-    // This is what we are Binding to in LapTimeListingView. {Binding LapTimes} is pointing to this.
+    // This is what we are Binding to in BestLapsLocalView. {Binding LapTimes} is pointing to this.
     // IEnumerable is the simplest type, this only allows to read, not write.
-    public IEnumerable<LapTimeViewModel> LapTimes => _laptimes;
+    public IEnumerable<BestLapsLocalVM> LapTimes => _laptimes;
     private readonly ITelemetryProvider _telemetryProvider;
-    private IEnumerable<LapTimeViewModel> _allLapTimes;
+    private IEnumerable<BestLapsLocalVM> _allLapTimes;
     private string _selectedTrack;
     public string SelectedTrack
     {
@@ -95,9 +95,9 @@ public class LapTimeListingViewModel : ViewModelBase
         }
     }
     
-    public LapTimeListingViewModel(ITelemetryProvider telemetryProvider)
+    public BestLapsLocalListingVM(ITelemetryProvider telemetryProvider)
     {
-        _laptimes = new ObservableCollection<LapTimeViewModel>();
+        _laptimes = new ObservableCollection<BestLapsLocalVM>();
         _telemetryProvider = telemetryProvider;
 
         LoadData();
@@ -112,12 +112,12 @@ public class LapTimeListingViewModel : ViewModelBase
         {
             IEnumerable<LapTime> rawData = await _telemetryProvider.GetAllLapTimes();
 
-            var loadedViewModels = new List<LapTimeViewModel>();
+            var loadedViewModels = new List<BestLapsLocalVM>();
             _laptimes.Clear();
 
             foreach (var lap in rawData)
             {
-                loadedViewModels.Add(new LapTimeViewModel(lap));
+                loadedViewModels.Add(new BestLapsLocalVM(lap));
             }
 
             _allLapTimes = loadedViewModels;
@@ -151,7 +151,7 @@ public class LapTimeListingViewModel : ViewModelBase
         if (_allLapTimes == null) return;
         _laptimes.Clear();
         
-        IEnumerable<LapTimeViewModel> results = _allLapTimes;
+        IEnumerable<BestLapsLocalVM> results = _allLapTimes;
         
         if (!string.IsNullOrEmpty(SelectedTrack) && SelectedTrack != "All Tracks")
         {

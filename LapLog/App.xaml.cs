@@ -26,7 +26,7 @@ public partial class App : Application
         MainWindow = new MainWindow()
         {
             // Defining datacontext for MainWindow.xaml
-            DataContext = new LapTimeListingViewModel(telemetryProvider)
+            DataContext = new BestLapsLocalListingVM(telemetryProvider)
         };
         
         MainWindow.Show();

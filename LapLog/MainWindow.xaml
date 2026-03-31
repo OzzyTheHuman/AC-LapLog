@@ -15,8 +15,8 @@
         <Grid Margin="20 10" MaxWidth="800">
                 <Grid.Resources>
                         <!--When you get signal from LapTimeListingViewModel (datacontext), use LapTimeListingView-->
-                        <DataTemplate DataType="{x:Type vms:LapTimeListingViewModel}">
-                                <views:LapTimeListingView/>
+                        <DataTemplate DataType="{x:Type vms:BestLapsLocalListingVM}">
+                                <views:BestLapsLocalView/>
                         </DataTemplate>
                 </Grid.Resources>
                 <!--Display what we are binding to. Binding without name is default datacontext-->
