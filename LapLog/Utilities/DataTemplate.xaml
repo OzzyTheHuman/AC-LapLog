@@ -11,8 +11,8 @@
         <view:BestLapsServerView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vms:ReportABugVM}">
-        <view:ReportABugView />
+    <DataTemplate DataType="{x:Type vms:SendFeedbackVM}">
+        <view:SendFeedbackView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vms:AboutAndInfoVM}">

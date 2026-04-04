@@ -1,6 +1,6 @@
 ﻿namespace LapLog.ViewModels;
 
-public class ReportABugVM
+public class SendFeedbackVM
 {
     
 }

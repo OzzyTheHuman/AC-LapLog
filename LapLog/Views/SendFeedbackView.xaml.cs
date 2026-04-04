@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace LapLog.Views;
 
-public partial class ReportABugView : UserControl
+public partial class SendFeedbackView : UserControl
 {
-    public ReportABugView()
+    public SendFeedbackView()
     {
         InitializeComponent();
     }
