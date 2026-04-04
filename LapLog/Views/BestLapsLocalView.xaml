@@ -6,10 +6,7 @@
              xmlns:local="clr-namespace:LapLog.Views"
              xmlns:vms="clr-namespace:LapLog.ViewModels"
              mc:Ignorable="d" d:DesignHeight="*" d:DesignWidth="*"
-             Style="{StaticResource Page_Style}">
-    
-
-    
+             Style="{StaticResource PageStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -5,9 +5,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Utilities/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/Page.xaml" />
+                <ResourceDictionary Source="Styles/PageStyle.xaml" />
                 <ResourceDictionary Source="Styles/TextNavigationButtons.xaml" />
-                <ResourceDictionary Source="Styles/Button.xaml" />
+                <ResourceDictionary Source="Styles/ButtonStyle.xaml" />
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

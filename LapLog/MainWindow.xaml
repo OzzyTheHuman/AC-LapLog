@@ -6,21 +6,70 @@
         xmlns:local="clr-namespace:LapLog"
         xmlns:views="clr-namespace:LapLog.Views"
         xmlns:vms="clr-namespace:LapLog.ViewModels"
+        xmlns:util="clr-namespace:LapLog.Utilites"
         mc:Ignorable="d"
-        Title="LapLog" Height="550" Width="900"
+        Title="LapLog" Height="600" Width="1000"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         FontSize="14"
+        Background="Transparent"
         Icon="/Assets/Icon/laplog-icon.ico">
+
         
-        
-        <Grid Margin="20 10" MaxWidth="800">
-                <Grid.Resources>
-                        <!--When you get signal from LapTimeListingViewModel (datacontext), use LapTimeListingView-->
-                        <DataTemplate DataType="{x:Type vms:BestLapsLocalListingVM}">
-                                <views:BestLapsLocalView/>
-                        </DataTemplate>
-                </Grid.Resources>
-                <!--Display what we are binding to. Binding without name is default datacontext-->
-                <!--The datacontext is defined in app.xaml.cs-->
-                <ContentControl Content="{Binding}"></ContentControl>
+        <Grid>
+                <Border Background="{StaticResource BackgroundBrush}"/>
+                <Grid>
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="228" />
+                                <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="blue" >
+                                <TextBlock Text="Test" VerticalAlignment="Center" Margin="8,0"/>
+                        </Border>
+
+                        <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource BackgroundBrush}">
+                                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8,8,4,8">
+                                        
+                                        <util:Btn Style="{StaticResource ButtonStyle}"
+                                                  Command="{Binding GoToBestLapsLocalCommand}"
+                                                  IsChecked="True">
+                                                <TextBlock Text="Best Laps - Local"
+                                                           Style="{StaticResource TextNavigationButtons}" />
+                                        </util:Btn>
+
+                                        <util:Btn Style="{StaticResource ButtonStyle}"
+                                                  Command="{Binding GoToBestLapsServerCommand}"
+                                                  IsChecked="False">
+                                                <TextBlock Text="Best Laps - Server"
+                                                           Style="{StaticResource TextNavigationButtons}" />
+                                        </util:Btn>
+                                        
+                                        <util:Btn Style="{StaticResource ButtonStyle}"
+                                                  Command="{Binding GoToAboutAndInfoCommand}"
+                                                  IsChecked="False">
+                                                <TextBlock Text="About &amp; Info"
+                                                           Style="{StaticResource TextNavigationButtons}" />
+                                        </util:Btn>
+                                        
+                                        <util:Btn Style="{StaticResource ButtonStyle}"
+                                                  Command="{Binding GoToSendFeedbackCommand}"
+                                                  IsChecked="False">
+                                                <TextBlock Text="Send Feedback"
+                                                           Style="{StaticResource TextNavigationButtons}" />
+                                        </util:Btn>
+                                </StackPanel>
+                        </Border>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                                <ContentControl Content="{Binding CurrentView}" />
+                        </Grid>
+                        
+                </Grid>
         </Grid>
 </Window>
