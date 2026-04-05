@@ -18,7 +18,7 @@
         Icon="/Assets/Icon/laplog-icon.ico">
         <WindowChrome.WindowChrome>
                 <!-- ResizeBorderThickness=6 - Arrows to resize a window -->
-                <!-- CaptionHeight=0 - Top border with DragMove method will be skipped (u cant resize a window in top border)  -->
+                <!-- CaptionHeight=0 - Turn off HTCAPTION, I will handle this methods myself-->
                 <WindowChrome CaptionHeight="0"
                               ResizeBorderThickness="6"
                               CornerRadius="0"
