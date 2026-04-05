@@ -16,7 +16,14 @@
         Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         Icon="/Assets/Icon/laplog-icon.ico">
-
+        <WindowChrome.WindowChrome>
+                <!-- ResizeBorderThickness=6 - Arrows to resize a window -->
+                <!-- CaptionHeight=0 - Top border with DragMove method will be skipped (u cant resize a window in top border)  -->
+                <WindowChrome CaptionHeight="0"
+                              ResizeBorderThickness="6"
+                              CornerRadius="0"
+                              GlassFrameThickness="0" />
+        </WindowChrome.WindowChrome>
         
         <Grid>
                 <Border Background="{StaticResource BackgroundBrush}"/>
@@ -31,10 +38,27 @@
                                 <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         
-                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="blue" 
+                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource TopBorderBrush}" 
                                 MouseLeftButtonDown="TopBorder_MouseDrag">
-                                
-                                <TextBlock Text="Test" VerticalAlignment="Center" Margin="8,0"/>
+                                <Grid>
+                                        <!--TODO: Change  background / Foreground color on mousehover-->
+                                        <TextBlock Text="Lap Log" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                   Margin="8,0" Foreground="White" FontWeight="Bold"/>
+                                        
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                                <Button Content="—" Width="40" Background="Transparent"
+                                                        Foreground="White" BorderThickness="0"
+                                                        Click="BtnMinimize_MouseClick" />
+                                                
+                                                <Button Content="⬜" Width="40" Background="Transparent"
+                                                        Foreground="White" BorderThickness="0"
+                                                        Click="BtnMaximize_MouseClick" />
+                                                
+                                                <Button Content="✕" Width="40" Background="Transparent"
+                                                        Foreground="White" BorderThickness="0" 
+                                                        Click="BtnClose_MouseClick" />
+                                        </StackPanel>
+                                </Grid>
                         </Border>
 
                         <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource BackgroundBrush}">

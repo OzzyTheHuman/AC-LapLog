@@ -29,4 +29,26 @@ public partial class MainWindow : Window
             this.DragMove();
         }
     }
+
+    private void BtnMinimize_MouseClick(object sender, RoutedEventArgs e)
+    {
+        this.WindowState = WindowState.Minimized;
+    }
+
+    private void BtnMaximize_MouseClick(object sender, RoutedEventArgs e)
+    {
+        if (this.WindowState == WindowState.Normal)
+        {
+            this.WindowState = WindowState.Maximized;
+        }
+        else
+        {
+            this.WindowState = WindowState.Normal;
+        }
+    }
+
+    private void BtnClose_MouseClick(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
+    }
 }

@@ -5,11 +5,11 @@
     <Color x:Key="SecondaryColor">#323131</Color>
     <Color x:Key="AccentColor">#de322e</Color>
     <Color x:Key="NotActiveColor">#828282</Color>
+    <Color x:Key="TopBorderColor">#1a1a1a</Color>
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
     <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
     <SolidColorBrush x:Key="NotActiveBrush" Color="{StaticResource NotActiveColor}" />
-    
+    <SolidColorBrush x:Key="TopBorderBrush" Color="{StaticResource TopBorderColor}"></SolidColorBrush>
 </ResourceDictionary>
