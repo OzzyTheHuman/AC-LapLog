@@ -30,7 +30,9 @@
                                 <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         
-                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="blue" >
+                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="blue" 
+                                MouseLeftButtonDown="TopBorder_MouseDrag">
+                                
                                 <TextBlock Text="Test" VerticalAlignment="Center" Margin="8,0"/>
                         </Border>
 
